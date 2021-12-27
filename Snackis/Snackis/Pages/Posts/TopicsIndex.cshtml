@@ -1,0 +1,72 @@
+﻿@page
+@model Snackis.Pages.Posts.TopicsIndexModel
+
+@{
+    ViewData["Title"] = "TopicsIndex";
+}
+
+
+<div class="container">
+    <div class="row>
+        @foreach (var subCat in Model.SubCategoryList)
+        {
+            @if (Model.Post != null)
+            {
+                @if (subCat.Id == Model.Post.SubCategoryId)
+                {
+
+                    <a asp-page="CreatePost" asp-route-id="@Model.Post.SubCategoryId"><button type="button" class="btn btn-secondary  float-right btnMargin">Skapa inlägg i @subCat.SubCatName</button></a>
+                }
+            }
+        }
+        @if (Model.Post != null)
+        {
+            <a asp-page="SubCategoryIndex" asp-route-id="@Model.Post.CategoryId"><button type="button" class="btn btn-secondary float-left btnMargin">Tillbaka till underkategorier</button></a>
+        }
+        <br />
+    </div>
+    <table class="table table-hover table-secondary table-striped">
+        <thead class="">
+            <tr>
+                <th>
+                    Datum
+                </th>
+                <th>
+                    Ämne
+                </th>
+                <th>
+                    Skrivet av
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="">
+            @if (Model.PostList != null)
+            {
+                @foreach (var item in Model.PostList)
+                {
+                    <tr>
+                        @if (Model.Post != null)
+                        {
+                            @if (item.SubCategoryId == @Model.Post.SubCategoryId && item.AnswerTo == 0)
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostedOn)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                    <a asp-page="ReadPost" asp-route-id="@item.Id"><button type="button" class="btn btn-secondary float-right">Läs inlägget</button></a>
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

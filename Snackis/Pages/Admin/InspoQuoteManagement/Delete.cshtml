@@ -1,0 +1,33 @@
+﻿@page
+@model Snackis.Pages.Admin.InspoQuoteManagement.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Ta bort</h1>
+
+<h3>Är du säker på att du vill ta bort detta citat?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Citat
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InspoQuote.Quote)
+        </dd>
+        <dt class="col-sm-2">
+            Författare
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InspoQuote.Author)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="InspoQuote.Id" />
+        <input type="submit" value="Ta bort" class="btn btn-danger" /> |
+        <a asp-page="./Index">Tillbaka</a>
+    </form>
+</div>

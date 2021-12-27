@@ -1,0 +1,52 @@
+﻿@page
+@model Snackis.Pages.Admin.ContentManagement.posts.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center"><h1>Alla inlägg</h1></div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Datum
+            </th>
+            <th>
+                Användarnamn
+            </th>
+            <th>
+                Innehåll
+            </th>
+            <th>
+                Ämne
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Post) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <div>
+                <a asp-page="./Delete" asp-route-id="@item.Id"><img src="~/img/trash-fill (1).svg" /></a>
+                <a asp-page="./Details" asp-route-id="@item.Id"><img src="~/img/search.svg" /></a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

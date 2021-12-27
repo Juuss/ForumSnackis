@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profil";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h4>@ViewData["Title"]</h4>
+<div>
+    <img class="avatar" src="~/api/avatar/@Model.CurrentUser" /><br />
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+    <p>Användarnamn: @Model.Username</p>
+    <p>
+        Mailadress: @Model.Email
+        @if (Model.IsEmailConfirmed)
+        {
+            <img src="~/img/check-circle-fill.svg" />
+        }
+        else
+        {
+            <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link"><img src="~/img/x-circle-fill.svg" />Bekräfta mailadress</button>
+        }
+    </p>
+            <form id="email-form" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.NewEmail">Ny mailadress</label>
+                    <input asp-for="Input.NewEmail" class="form-control" />
+                    <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+                </div>
+                <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="btn btn-secondary">Spara</button>
+            </form>
+        </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

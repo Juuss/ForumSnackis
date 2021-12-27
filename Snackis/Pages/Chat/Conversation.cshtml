@@ -1,0 +1,78 @@
+﻿@page
+@model Snackis.Pages.Chat.ConversationModel
+
+@using Microsoft.AspNetCore.Identity;
+@using Snackis.Areas.Identity.Data;
+@inject SignInManager<SnackisUser> SignInManager
+@inject UserManager<SnackisUser> UserManager
+
+
+@{
+    ViewData["Title"] = "Conversation";
+}
+
+<h1>Konversation med @Model.ConversationWith.UserName</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Från
+            </th>
+            <th>
+                Till
+            </th>
+            <th>
+                Skickat
+            </th>
+            <th>
+                Meddelande
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ChattMessage)
+        {
+            <tr>
+                @foreach (var sender in Model.UserList)
+                {
+                    @if (sender.Id == item.SenderId)
+                    {
+                        <td>
+                            @sender.UserName
+                        </td>
+                    }
+                }
+                @foreach (var recipient in Model.UserList)
+                {
+                    @if (recipient.Id == item.RecipientId)
+                    {
+                        <td>
+                            @recipient.UserName
+                        </td>
+                    }
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.SentTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+                <td>
+                    @if (item.RecipientId == UserManager.GetUserId(User))
+                    {
+                        <a asp-page="./SendMessage" asp-route-id="@item.SenderId">Svara</a>
+                    }
+                </td>
+                <td>
+                    @if (item.SenderId == UserManager.GetUserId(User))
+                    {
+                        <a asp-page="DeleteMessage" asp-route-id="@item.Id">Ta bort</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

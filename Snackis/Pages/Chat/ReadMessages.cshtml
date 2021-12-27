@@ -1,0 +1,37 @@
+﻿@page
+@model Snackis.Pages.Chat.ReadMessagesModel
+
+@{
+    ViewData["Title"] = "ReadMessages";
+}
+
+<h1>Mina meddelanden</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Användarnamn
+            </th>
+            <th>
+                Senaste meddelande
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Conversations) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LatestMessageDate)
+            </td>
+            <td>
+                <a asp-page="Conversation" asp-route-id="@item.UserId">Läs</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

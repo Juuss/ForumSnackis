@@ -1,0 +1,124 @@
+﻿@page
+@model Snackis.Pages.Admin.IndexModel
+@{
+}
+
+<div>
+    Befintliga roller: <br />
+    @foreach (var role in Model.Roles)
+    {
+        <p>@role.Name</p>
+    }
+</div>
+
+@if (Model.isAdmin)
+{
+    <p>Den här får bara administratören se</p>
+}
+@if (Model.isMod)
+{
+    <p>Den här får bara moderatorer se</p>
+}
+@if (Model.isUser)
+{
+    <p>Det här får bara användarna se</p>
+}
+
+
+
+<form method="post">
+    <label for="RoleName">Ny Roll</label>
+    <input name="RoleName" />
+    <input type="submit" value="Skapa ny roll" />
+</form>
+
+<div>
+    Befintliga användare: <br />
+    <table>
+        <tr>
+            <th>Användarnamn:</th>
+            @foreach (var role in Model.Roles)
+            { 
+                <th>@role.Name</th>
+            }
+        </tr>
+
+        @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+
+                    @foreach (var role in Model.Roles)
+                    {
+                        if (await Model._userManager.IsInRoleAsync(user, role.Name))
+                        {
+                            <td><a href="?RemoveUserId=@user.Id&Role=@role.Name" class="bg-success">YES</a></td>
+                        }
+                        else
+                        { 
+                            <td><a href="?AddUserId=@user.Id&Role=@role.Name" class="bg-danger">NO</a></td>
+                        }
+                    }
+                </tr>
+            }
+    </table>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Administratörer</th>
+            <th scope="col">Moderatorer</th>
+            <th scope="col">Användare</th>
+        </tr>
+    </thead>
+
+    <div>
+        Befintliga användare: <br />
+        <table>
+            <tr>
+                <th>Användarnamn:</th>
+                @foreach (var role in Model.Roles)
+                {
+                    <th>@role.Name</th>
+                }
+            </tr>
+
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+
+                    @foreach (var role in Model.Roles)
+                    {
+                        if (await Model._userManager.IsInRoleAsync(user, role.Name))
+                        {
+                            <td><a href="?RemoveUserId=@user.Id&Role=@role.Name" class="bg-success">YES</a></td>
+                        }
+                        else
+                        {
+                            <td><a href="?AddUserId=@user.Id&Role=@role.Name" class="bg-danger">NO</a></td>
+                        }
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+    <tbody>
+        @foreach (var role in Model.Roles)
+        {
+            <tr>
+                @if (role.Name == "Admin")
+                {
+                    <th>@role.</th>
+                }
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+            </tr>
+        }
+    </tbody>
+</table>

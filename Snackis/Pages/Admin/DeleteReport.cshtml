@@ -1,0 +1,39 @@
+﻿@page
+@model Snackis.Pages.Admin.DeleteReportModel
+
+@{
+    ViewData["Title"] = "DeleteReport";
+}
+
+<h1>Ta bort anmälan</h1>
+
+<h3>Vill du verkligen ta bort denna anmälan?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Anmält av
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ReportedBy
+        </dd>
+        <dt class="col-sm-2">
+            Anmält
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Report.ReportTime)
+        </dd>
+        <dt class="col-sm-2">
+            Anledning
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Report.Reason)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Report.Id" />
+        <input type="submit" value="Ta bort" class="btn btn-danger" /> |
+        <a asp-page="./ReportedPosts">Tillbaka</a>
+    </form>
+</div>

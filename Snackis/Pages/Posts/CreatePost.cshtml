@@ -1,0 +1,75 @@
+﻿@page
+@model Snackis.Pages.Posts.CreatePostModel
+
+@using Microsoft.AspNetCore.Identity;
+@using Snackis.Areas.Identity.Data;
+
+@inject SignInManager<SnackisUser> SignInManager
+@inject UserManager<SnackisUser> UserManager
+
+@{
+    ViewData["Title"] = "CreatePost";
+}
+
+@foreach (var cat in Model.CategoryList)
+{
+    @foreach (var subCat in Model.SubCategoryList)
+    {
+        if (Model.Post.CategoryId == cat.Id && Model.Post.SubCategoryId == subCat.Id)
+        {
+            <h4>Skapa nytt inlägg<br />
+            Kategori: @cat.CategoryName<br />
+            Underkategori: @subCat.SubCatName</h4>
+        }
+    }
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Post.SubCategoryId" class="form-control" hidden="hidden" />
+                <span asp-validation-for="Post.SubCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Post.CategoryId" class="form-control" hidden="hidden" />
+                <span asp-validation-for="Post.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Post.PostedOn" hidden="hidden" class="form-control" />
+                <span asp-validation-for="Post.PostedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Post.UserId" hidden="hidden" class="form-control" value="@UserManager.GetUserId(User)" />
+                <span asp-validation-for="Post.UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Post.UserName" hidden="hidden" class="form-control" value="@UserManager.GetUserName(User)" />
+                <span asp-validation-for="Post.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Post.Title" class="control-label">Ämne</label>
+                <input asp-for="Post.Title" class="form-control" />
+                <span asp-validation-for="Post.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Post.PostText" class="control-label">Inlägg</label>
+                <textarea asp-for="Post.PostText" class="form-control"></textarea>
+                <span asp-validation-for="Post.PostText" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Skicka" class="btn btn-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="TopicsIndex" asp-route-id="@Model.SubCategory.Id"><button type="button" class="btn btn-secondary">Tillbaka till underkategorin @Model.SubCategory.SubCatName</button></a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

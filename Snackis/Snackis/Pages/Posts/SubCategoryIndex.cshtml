@@ -1,0 +1,40 @@
+﻿@page 
+@model Snackis.Pages.Posts.SubCategoryIndexModel
+
+@{
+    ViewData["Title"] = "Underkategorier";
+}
+<div class="container">
+    <div class="col-6 center text-center">
+        <div class="card">
+            <div class="card-header text-center">
+                @foreach (var cat in Model.CategoryList)
+                {
+                    @if (cat.Id == Model.SubCategory.CategoryID)
+                    {
+                        <div class="Titles">Underkategorier i @cat.CategoryName</div>
+                    }
+                }
+            </div>
+            <ul class="list-group list-group-flush text-center" style="list-style-type: none;">
+                @foreach (var item in @Model.SubCategoryList)
+                {
+                    @if (Model.SubCategory != null)
+                    {
+                        @if (item.CategoryID == @Model.SubCategory.CategoryID)
+                        {
+                            <li>
+                                <a class="subTitles" asp-page="TopicsIndex" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.SubCatName)</a>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+        <br />
+        <p>
+            <a href="@Url.Page("/index")"><button type="button" class="btn btn-secondary">Tillbaka till översikten</button></a>
+        </p>
+    </div>
+
+</div>

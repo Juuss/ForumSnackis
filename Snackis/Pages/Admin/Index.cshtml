@@ -1,0 +1,42 @@
+﻿@page
+@model Snackis.Pages.Admin.IndexModel
+@{
+}
+<div>
+    <form method="post" class="float-left">
+        <label for="RoleName">Ny Roll</label>
+        <input name="RoleName" />
+        <input type="submit" class="btn btn-secondary" value="Skapa ny roll" />
+    </form>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Befintliga roller
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            @foreach (var role in Model.Roles)
+            {
+                <a class="dropdown-item" href="#">@role.Name</a>
+            }
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover table-secondary table-striped">
+    <thead>
+        <tr>
+            <td>Användarnamn</td>
+            <td>Ta bort admin</td>
+            <td>Lägg till admins</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                    <td><a href="?RemoveAdminId=@user.Id&Role=" Admin"><img src="~/img/check-square-fill.svg" /></a></td>
+                    <td><a href="?AddAdminId=@user.Id&Role=" Admin"><img src="~/img/square.svg" /></a></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,183 @@
+﻿@page
+@model Snackis.Pages.Posts.ReadPostModel
+@using Microsoft.AspNetCore.Identity;
+@using Snackis.Areas.Identity.Data;
+@inject SignInManager<SnackisUser> SignInManager
+@inject UserManager<SnackisUser> UserManager
+@{
+    ViewData["Title"] = "ReadPost";
+}
+
+<table class="table-borderless">
+    <tbody>
+        <tr>
+            <td>
+                @foreach (var cat in Model.CategoryList)
+                {
+                    if (cat.Id == Model.Post.CategoryId)
+                    {
+                        <p>@cat.CategoryName /</p>
+                    }
+                }
+            </td>
+            <td>
+                @foreach (var subCat in Model.SubCategoryList)
+                {
+                    @if (subCat.Id == Model.Post.SubCategoryId)
+                    {
+                        <p>@subCat.SubCatName /</p>
+                    }
+                }
+            </td>
+            <td>
+                @foreach (var topics in Model.PostList)
+                {
+                    @if (topics.Id == Model.Post.Id)
+                    {
+                        <p>@topics.Title av @topics.UserName</p>
+                    }
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@foreach (var subCat in Model.SubCategoryList)
+{
+    @if (subCat.Id == Model.Post.SubCategoryId)
+    {
+        <a asp-page="TopicsIndex" asp-route-id="@subCat.Id"><button type="button" class="btn btn-secondary btnMargin">Tillbaka till @subCat.SubCatName</button></a>
+    }
+}
+<a asp-controller="Download" asp-action="DownloadThread" asp-route-id="@Model.Post.Id" download="thread(@Model.Post.Id).json"><button type="button" class="btn btn-secondary btnMargin float-right">Ladda ner API</button></a>
+
+<div class="Container">
+    <div class="card border-dark">
+        <div class="card-header bg-secondary">
+            @if (Model.Post.UserName == UserManager.GetUserName(User))
+            {
+                <a asp-page="ReportPost" asp-route-id="@Model.Post.Id">
+                    <button type="button" class="btn btn-dark float-right">Redigera</button>
+                </a>
+            }
+            <img class="avatar float-left" src="~/api/avatar/@Model.Post.UserId" />
+            Ämne: <b>@Model.Post.Title</b><br />
+            Användarnamn: @Model.Post.UserName <br />
+            Publicerat: @Model.Post.PostedOn
+        <div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <button id="ReplyButton" class="btn btn-dark float-right">Svara</button>
+                <a asp-page="/Chat/SendMessage" asp-route-id="@Model.Post.UserId"><button id="" class="btn btn-dark">Skicka meddelande</button></a>
+                <a asp-page="ReportPost" asp-route-id="@Model.Post.Id"><button type="button" class="btn btn-dark">Anmäl</button></a>
+            }
+            else
+            {
+                <button id="ReplyButton" class="btn btn-dark float-right">Svara</button>
+            }
+        </div>
+        </div>
+        <div class="card-body">
+            <p class="card-text">@Model.Post.PostText</p>
+            <div id="ReplyBox" style="display: none">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <input asp-for="NewPost.SubCategoryId" class="form-control" hidden="hidden" />
+                                <span asp-validation-for="NewPost.SubCategoryId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="NewPost.CategoryId" class="form-control" hidden="hidden" />
+                                <span asp-validation-for="NewPost.CategoryId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="NewPost.PostedOn" class="form-control" hidden="hidden" />
+                                <span asp-validation-for="NewPost.PostedOn" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="NewPost.UserId" class="form-control" value="@UserManager.GetUserId(User)" hidden="hidden" />
+                                <span asp-validation-for="NewPost.UserId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="NewPost.UserName" class="form-control" value="@UserManager.GetUserName(User)" hidden="hidden" />
+                                <span asp-validation-for="NewPost.UserName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Svara:</label>
+                                <input asp-for="NewPost.PostText" class="form-control" />
+                                <span asp-validation-for="NewPost.PostText" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="NewPost.Title" class="form-control" value="Sv: @Model.Post.Title" hidden="hidden" />
+                                <span asp-validation-for="Post.Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="NewPost.AnswerTo" class="form-control" value="@Model.Post.Id" hidden="hidden" />
+                                <span asp-validation-for="NewPost.AnswerTo" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Skicka" class="btn btn-secondary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="ReportBox" style="display: none">
+                <p>Anmäl inlägget här</p>
+            </div>
+            <div id="EditBox" style="display: none">
+                <p>Redigera inlägget här</p>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    @if (Model.PostList != null)
+    {
+        @foreach (var item in Model.PostList)
+        {
+            @if (Model.Post != null)
+            {
+                @if (item.AnswerTo == @Model.Post.Id && item.AnswerTo != 0)
+                {
+                    <div class="card border-dark">
+                        <div class="card-header bg-secondary">
+                            @if (item.UserName == UserManager.GetUserName(User) && item.UserName != null)
+                            {
+                                <a asp-page="ReportPost" asp-route-id="@item.Id">
+                                    <button type="button" class="btn btn-dark float-right">Redigera</button>
+                                </a>
+                            }
+                            @if (item.UserName != null)
+                            {
+                                <img class="avatar float-left" src="~/api/avatar/@item.UserId" />
+                                <p>Användarnamn: @item.UserName</p>
+                                <p>Publicerat: @item.PostedOn</p>
+                            }
+                            else
+                            {
+                                <p>Användarnamn: Anonym</p>
+                                <p>Publicerat: @item.PostedOn</p><br />
+                            }
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                @if (item.UserName != null)
+                                {
+                                 <a asp-page="/Chat/SendMessage" asp-route-id="@item.UserId">
+                                 <button id="" class="btn btn-dark">Skicka meddelande</button></a>
+                                }
+                            <a asp-page="ReportPost" asp-route-id="@item.Id"><button type="button" class="btn btn-dark">Anmäl</button></a>
+                            }
+                                </div>
+                        <div class="card-body">
+                            <p class="card-text">@item.PostText</p>
+                        </div>
+                    </div>
+                    <br />
+                }
+            }
+        }
+    }
+</div>

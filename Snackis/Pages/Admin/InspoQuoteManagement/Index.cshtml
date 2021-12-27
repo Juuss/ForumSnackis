@@ -1,0 +1,41 @@
+﻿@page
+@model Snackis.Pages.Admin.InspoQuoteManagement.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Citat</h1>
+
+<p>
+    <a asp-page="Create">Skapa ny</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Citat
+            </th>
+            <th>
+                Författare
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.InspoQuote) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Redigera</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Ta bort</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

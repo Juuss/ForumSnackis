@@ -1,0 +1,23 @@
+﻿@page
+@model Snackis.Pages.Admin.ReportedManageModel
+
+<div>
+    <h2>Hantera inlägg</h2>
+
+<div class="card border-dark">
+    <div class="card-header bg-secondary">
+        <img class="avatar float-left" src="~/api/avatar/@Model.Post.UserId" />
+        <a asp-page="/Admin/ContentManagement/posts/Delete" asp-route-id="@Model.Post.Id"><button type="button" class="btn btn-dark float-right">Ta bort inlägg</button></a>
+        <a asp-page="/Posts/ReadPost" asp-route-id="@Model.Post.Id"><button type="button" class="btn btn-dark float-right">Gå till tråd</button></a>
+        Användarnamn: @Model.Post.UserName<br />
+        Publicerat: @Model.Post.PostedOn<br />
+        Svar på: @Model.Post.AnswerTo
+    </div>
+    <div class="card-body">
+        <p class="card-text">@Model.Post.PostText</p>
+    </div>
+</div>
+<div>
+    <a asp-page="./ReportedPosts">Tillbaka</a>
+</div>
+    </div>

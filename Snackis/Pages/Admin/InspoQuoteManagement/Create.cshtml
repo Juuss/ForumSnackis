@@ -1,0 +1,38 @@
+﻿@page
+@model Snackis.Pages.Admin.InspoQuoteManagement.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Skapa</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="InspoQuote.Quote" class="control-label">Citat</label>
+                <input asp-for="InspoQuote.Quote" class="form-control" />
+                <span asp-validation-for="InspoQuote.Quote" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InspoQuote.Author" class="control-label">Författare</label>
+                <input asp-for="InspoQuote.Author" class="form-control" />
+                <span asp-validation-for="InspoQuote.Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Skapa" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Tillbaka</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

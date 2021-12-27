@@ -1,0 +1,50 @@
+﻿@page
+@model Snackis.Pages.Admin.ContentManagement.subcat.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>@Model.Category.CategoryName</h4>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+        </div>
+        <div class="col-sm">
+            <h3> Befintliga underkategorier</h3>
+         @foreach (var cat in Model.subCategories)
+         {
+             if (cat.CategoryID == Model.Category.Id)
+                {
+                  <p>@cat.SubCatName</p>
+                }
+         }
+        </div>
+        <div class="text-right col-sm">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input asp-for="SubCategory.SubCatName" class="form-control" placeholder="Namn på ny underkategori:" />
+                        <span asp-validation-for="SubCategory.SubCatName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input runat="server" asp-for="SubCategory.CategoryID" class="form-control" hidden="hidden" Value="@Model.Category.Id" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+        </div>
+    </div>
+    </div>
+
+    <div>
+        <a asp-page="Index" asp-area="ContentManagement">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

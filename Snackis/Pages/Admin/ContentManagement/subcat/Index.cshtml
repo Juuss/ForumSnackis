@@ -1,0 +1,46 @@
+﻿@page
+@model Snackis.Pages.Admin.ContentManagement.subcat.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center"><h1>Underkategorier</h1></div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                KategoriID
+            </th>
+            <th>
+                ID
+            </th>
+            <th>
+                Underkategori
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.SubCategory)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubCatName)
+            </td>
+            <td>
+                <a asp-page="./Delete" asp-route-id="@item.Id"><img src="~/img/trash-fill (1).svg" /></a>
+                <a asp-page="./Edit" asp-route-id="@item.Id"><img src="~/img/pencil-square.svg" /></a>
+                <a asp-page="./Details" asp-route-id="@item.Id"><img src="~/img/search.svg" /></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

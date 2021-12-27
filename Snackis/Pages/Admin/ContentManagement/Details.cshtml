@@ -1,0 +1,51 @@
+﻿@page
+@model Snackis.Pages.Admin.ContentManagement.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detaljer</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Namn
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+    </dl>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Underkategorier i @Model.Category.CategoryName
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+                @foreach (var subCat in Model.SubCategories)
+                {
+            <tr>
+
+                <td>
+                    @subCat.SubCatName
+
+                </td>
+                <td>
+                    <a asp-page="./subcat/Delete" asp-route-id="@subCat.Id"><img src="~/img/trash-fill (1).svg" /></a>
+                    <a asp-page="./subcat/Edit" asp-route-id="@subCat.Id"><img src="~/img/pencil-square.svg" /></a>
+                </td>
+            </tr>
+                    }
+                
+            </tbody>
+    </table>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Category.Id">Redigera</a> |
+    <a asp-page="./Index">Tillbaka</a>
+</div>

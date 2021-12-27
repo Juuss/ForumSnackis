@@ -1,0 +1,47 @@
+﻿@page
+@model Snackis.Pages.Posts.ReportPostModel
+
+@{
+    ViewData["Title"] = "ReportPost";
+}
+
+<h4>Anmälan</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Report.PostId" class="form-control" hidden="hidden" />
+                <span asp-validation-for="Report.PostId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Report.ReportedBy" class="form-control" hidden="hidden"/>
+                <span asp-validation-for="Report.ReportedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Report.Reason" class="control-label">Orsak till anmälan</label>
+                <textarea asp-for="Report.Reason" rows="5" class="form-control" ></textarea>
+                <span asp-validation-for="Report.Reason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Report.ReportTime" class="form-control" hidden="hidden"/>
+                <span asp-validation-for="Report.ReportTime" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                    <input class="form-check-input" asp-for="Report.BeenHandled" hidden="hidden"/>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Skicka" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="ReadPost" asp-route-id="@Model.BacktoThread">Tillbaka till inlägget</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

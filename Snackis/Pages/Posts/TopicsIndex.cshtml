@@ -1,0 +1,59 @@
+﻿@page
+@model Snackis.Pages.Posts.TopicsIndexModel
+
+@{
+    ViewData["Title"] = "TopicsIndex";
+}
+
+<div class="container">
+    @if (Model.SubCategory != null)
+    {
+        <a asp-page="CreatePost" asp-route-id="@Model.SubCategory.Id">
+        <button type="button" class="btn btn-secondary  float-right btnMargin">Skapa inlägg i @Model.SubCategory.SubCatName</button></a>
+        <a asp-page="SubCategoryIndex" asp-route-id="@Model.SubCategory.CategoryID"><button type="button" class="btn btn-secondary float-left btnMargin">Tillbaka till underkategorier</button></a>
+    }
+    <table class="table table-hover table-secondary table-striped table-bordered">
+        <thead class="bg-dark">
+            <tr>
+                <th style="color: white">
+                    Datum
+                </th>
+                <th style="color: white">
+                    Ämne
+                </th>
+                <th style="color: white">
+                    Skrivet av
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.PostList != null)
+            {
+                @foreach (var item in Model.PostList)
+                {
+                    <tr>
+                        @if (Model.Post != null)
+                        {
+                            @if (item.SubCategoryId == @Model.Post.SubCategoryId && item.AnswerTo == 0)
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostedOn)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                    <a asp-page="ReadPost" asp-route-id="@item.Id"><button type="button" class="btn btn-secondary float-right">Läs inlägget</button></a>
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

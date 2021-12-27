@@ -1,0 +1,46 @@
+﻿@page
+@model Snackis.Pages.Admin.ContentManagement.ReportedPostsModel
+
+<h1>Anmälda inlägg</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Anmält av
+            </th>
+            <th>
+                Rapporterat
+            </th>
+            <th>
+                Motivering
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Report) {
+        <tr>
+            <td>
+                @foreach (var User in @Model.UserList)
+                {
+                    if (item.ReportedBy == User.Id)
+                    {
+                        <p>@User.UserName</p>
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReportTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+            <td>
+                <a asp-page="./ReportedManage" asp-route-id="@item.PostId"><img src="~/img/pencil-square.svg" /></a> |
+                <a asp-page="./DeleteReport" asp-route-id="@item.Id"><img src="~/img/trash-fill (1).svg" /></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,46 @@
+﻿@page
+@model Snackis.Pages.Admin.ContentManagement.posts.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Ta bort inlägg</h1>
+
+<h3>Är du säker på att du vill ta bort detta inlägg?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Postat
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Post.PostedOn)
+        </dd>
+        <dt class="col-sm-2">
+            Postat av
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Post.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Post.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Post.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Post.PostText)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Post.PostText)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Post.Id" />
+        <input type="hidden" asp-for="Report.Id" />
+        <input type="submit" value="Ta bort" class="btn btn-danger" /> |
+        <a asp-page="./Index">Tillbaka</a>
+    </form>
+</div>

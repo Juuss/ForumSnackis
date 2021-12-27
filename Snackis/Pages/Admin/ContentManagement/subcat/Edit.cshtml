@@ -1,0 +1,38 @@
+﻿@page
+@model Snackis.Pages.Admin.ContentManagement.subcat.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Redigera</h1>
+
+<h4>Underkategori: @Model.SubCategory.SubCatName</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SubCategory.Id" />
+            <div class="form-group">
+                <label asp-for="SubCategory.SubCatName" class="control-label">Namn på underkategori</label>
+                <input asp-for="SubCategory.SubCatName" class="form-control" />
+                <span asp-validation-for="SubCategory.SubCatName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="SubCategory.CategoryID" class="form-control" hidden="hidden" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Spara" class="btn btn-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Admin/ContentManagement/Details" asp-route-id="@Model.SubCategory.CategoryID">Tillbaka</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
