@@ -5990,11 +5990,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jabba\\GitHub\\Snackis\\InspoQuotes\\InspoQuotes.csproj",
+      "projectUniqueName": "C:\\Users\\jabba\\GitHub\\ForumSnackis\\InspoQuotes\\InspoQuotes.csproj",
       "projectName": "InspoQuotes",
-      "projectPath": "C:\\Users\\jabba\\GitHub\\Snackis\\InspoQuotes\\InspoQuotes.csproj",
+      "projectPath": "C:\\Users\\jabba\\GitHub\\ForumSnackis\\InspoQuotes\\InspoQuotes.csproj",
       "packagesPath": "C:\\Users\\jabba\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jabba\\GitHub\\Snackis\\InspoQuotes\\obj\\",
+      "outputPath": "C:\\Users\\jabba\\GitHub\\ForumSnackis\\InspoQuotes\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jabba\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BCfBvhNW4msnYSzRQxqscYszeOKXQDC2sw+ZtLR/KAwLLcR8p+MRR/ydOblAg03xpWMW9GXX66hJw271pITZ9w==",
+  "dgSpecHash": "OXBBriGZuvJA8ytlbdfGdKVzdil6yN4CN4RNnVIomjs6gvF0FIuM6KtjmfcpPI6MsbwOnMxRmzyi8nAEczz9eQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jabba\\GitHub\\Snackis\\InspoQuotes\\InspoQuotes.csproj",
+  "projectFilePath": "C:\\Users\\jabba\\GitHub\\ForumSnackis\\InspoQuotes\\InspoQuotes.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jabba\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\jabba\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

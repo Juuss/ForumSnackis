@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jabba\\GitHub\\Snackis\\Snackis\\Snackis.csproj": {}
+    "C:\\Users\\jabba\\GitHub\\ForumSnackis\\Snackis\\Snackis.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jabba\\GitHub\\Snackis\\Snackis\\Snackis.csproj": {
+    "C:\\Users\\jabba\\GitHub\\ForumSnackis\\Snackis\\Snackis.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jabba\\GitHub\\Snackis\\Snackis\\Snackis.csproj",
+        "projectUniqueName": "C:\\Users\\jabba\\GitHub\\ForumSnackis\\Snackis\\Snackis.csproj",
         "projectName": "Snackis",
-        "projectPath": "C:\\Users\\jabba\\GitHub\\Snackis\\Snackis\\Snackis.csproj",
+        "projectPath": "C:\\Users\\jabba\\GitHub\\ForumSnackis\\Snackis\\Snackis.csproj",
         "packagesPath": "C:\\Users\\jabba\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jabba\\GitHub\\Snackis\\Snackis\\obj\\",
+        "outputPath": "C:\\Users\\jabba\\GitHub\\ForumSnackis\\Snackis\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jabba\\AppData\\Roaming\\NuGet\\NuGet.Config",

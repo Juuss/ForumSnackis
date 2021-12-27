@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "F7ONprxaxIogavV2nrG030FgtqLpmPkeawDcSEmVlDz8gHoD7EuRXaKxm7hEq7Ar3DDdKGm9k5KmKFfI7L23LQ==",
+  "dgSpecHash": "rkDsHHayspf2HRSOZZh9kg6v8MihyugBG3EocxE3J2m7Zn97PH6ogsFbe+iNooty4EKC28s3xI+O1moVkd8tMg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jabba\\GitHub\\Snackis\\Snackis\\Snackis.csproj",
+  "projectFilePath": "C:\\Users\\jabba\\GitHub\\ForumSnackis\\Snackis\\Snackis.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jabba\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\jabba\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.13\\microsoft.aspnetcore.cryptography.internal.5.0.13.nupkg.sha512",
